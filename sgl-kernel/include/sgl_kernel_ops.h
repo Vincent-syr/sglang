@@ -179,6 +179,16 @@ void topk_softmax(
     torch::Tensor& token_expert_indices,
     torch::Tensor& gating_output);
 
+void moe_biased_grouped_topk(
+    const torch::Tensor& scores,
+    const torch::Tensor& e_score_correction_bias,
+    int64_t num_groups,
+    int64_t topk_group,
+    int64_t topk,
+    double routed_scaling_factor,
+    torch::Tensor& topk_idx,
+    torch::Tensor& topk_weight);
+
 /*
  * From csrc/speculative
  */

@@ -122,6 +122,10 @@ TORCH_LIBRARY_EXPAND(sgl_kernel, m) {
       "token_expert_indices, Tensor gating_output) -> ()");
   m.impl("topk_softmax", torch::kCUDA, &topk_softmax);
 
+  m.def(
+      "moe_biased_grouped_topk(Tensor scores, Tensor e_score_correction_bias, int num_groups, int topk_group, int topk, float routed_scaling_factor, Tensor! topk_idx, Tensor! topk_weight) -> ()");
+  m.impl("moe_biased_grouped_topk", torch::kCUDA, &moe_biased_grouped_topk);
+
   /*
    * From csrc/speculative
    */

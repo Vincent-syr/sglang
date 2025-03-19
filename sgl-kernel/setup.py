@@ -158,6 +158,7 @@ sources = [
     "csrc/gemm/per_tensor_quant_fp8.cu",
     "csrc/moe/moe_align_kernel.cu",
     "csrc/moe/moe_topk_softmax_kernels.cu",
+    "csrc/moe/moe_biased_grouped_topk.cu",
     "csrc/speculative/eagle_utils.cu",
     "csrc/speculative/speculative_sampling.cu",
     "csrc/speculative/packbit.cu",

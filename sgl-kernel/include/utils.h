@@ -118,6 +118,35 @@ constexpr auto FP8_E4M3_MAX = 224.0f;
 #endif
 
 #ifndef USE_ROCM
+template<typename T>
+struct NumericLimits;
+
+template<>
+struct NumericLimits<__nv_bfloat16> {
+    __device__ __forceinline__ static __nv_bfloat16 max() {
+        constexpr uint16_t a = 0x7bff;
+        return *((__nv_bfloat16*)(&a)); 
+    }
+};
+
+template<>
+struct NumericLimits<half> {
+    __device__ __forceinline__ static half max() {
+        constexpr uint16_t a = 0x7f7f;
+        return *((half*)(&a));
+    }
+};
+
+template<>
+struct NumericLimits<float> {
+    __device__ __forceinline__ static float max() {
+        return FLT_MAX;
+    }
+};
+
+#endif
+
+#ifndef USE_ROCM
 __device__ __forceinline__ float atomicMaxFloat(float* addr, float value) {
   float old;
   old = (value >= 0) ? __int_as_float(atomicMax((int*)addr, __float_as_int(value)))
