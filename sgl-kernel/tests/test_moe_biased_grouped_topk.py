@@ -69,10 +69,8 @@ def test_moe_biased_grouped_topk_compare_implementations(
     topk_group: int,
     topk: int
 ):
-    print("test_moe_biased_grouped_topk_compare_implementations")
     logits = torch.randn([tokens, n_routed_experts], dtype=torch.float32, device="cuda")
     e_score_correction_bias = torch.randn([n_routed_experts], dtype=torch.float32, device="cuda")
-    print("native")
     topk_idx_native, topk_weight_native = native_moe_biased_grouped_topk(
         logits.clone(),
         e_score_correction_bias.clone(),
